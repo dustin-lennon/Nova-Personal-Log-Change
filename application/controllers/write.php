@@ -43,6 +43,8 @@ class Write extends Write_base {
 		$content = FALSE;
 		$title = FALSE;
 		$tags = FALSE;
+		$location = FALSE;
+		$sdate = FALSE;
 
 		if (isset($_POST['submit']))
 		{
@@ -51,6 +53,8 @@ class Write extends Write_base {
 			$content = $this->input->post('content', TRUE);
 			$author = $this->input->post('author', TRUE);
 			$tags = $this->input->post('tags', TRUE);
+			$location = $this->input->post('location', TRUE);
+			$sdate = $this->input->posts('sdate', TRUE);
 			$action = strtolower($this->input->post('submit', TRUE));
 			$status = FALSE;
 			$flash = FALSE;
@@ -124,6 +128,8 @@ class Write extends Write_base {
 								'log_title' => $title,
 								'log_content' => $content,
 								'log_tags' => $tags,
+								'log_stardate' => $sdate,
+								'log_location' => $location,
 								'log_status' => 'saved',
 								'log_last_update' => now(),
 							);
@@ -165,6 +171,8 @@ class Write extends Write_base {
 								'log_title' => $title,
 								'log_content' => $content,
 								'log_tags' => $tags,
+								'log_stardate' => $sdate,
+								'log_location' => $location,
 								'log_status' => 'saved',
 								'log_last_update' => now()
 							);
@@ -194,6 +202,8 @@ class Write extends Write_base {
 								$content = FALSE;
 								$title = FALSE;
 								$tags = FALSE;
+								$location = FALSE;
+								$sdate = FALSE;
 							}
 							else
 							{
@@ -227,6 +237,8 @@ class Write extends Write_base {
 								'log_title' => $title,
 								'log_content' => $content,
 								'log_tags' => $tags,
+								'log_location' => $location,
+								'log_stardate' => $sdate,
 								'log_status' => $status,
 								'log_last_update' => now()
 							);
@@ -254,6 +266,8 @@ class Write extends Write_base {
 								$email_data = array(
 									'author' => $author,
 									'title' => $title,
+									'stardate' => $sdate,
+									'location' => $location,
 									'content' => $content
 								);
 
@@ -291,6 +305,8 @@ class Write extends Write_base {
 								'log_title' => $title,
 								'log_content' => $content,
 								'log_tags' => $tags,
+								'log_stardate' => $sdate,
+								'log_location' => $location,
 								'log_status' => $status,
 								'log_last_update' => now()
 							);
@@ -318,6 +334,8 @@ class Write extends Write_base {
 								$email_data = array(
 									'author' => $author,
 									'title' => $title,
+									'stardate' => $sdate,
+									'location' => $location,
 									'content' => $content
 								);
 
@@ -336,6 +354,8 @@ class Write extends Write_base {
 								$content = FALSE;
 								$title = FALSE;
 								$tags = FALSE;
+								$sdate = FALSE;
+								$location = FALSE;
 							}
 							else
 							{
@@ -362,7 +382,7 @@ class Write extends Write_base {
 				$this->template->write_view('flash_message', '_base/admin/pages/flash', $flash);
 			}
 		}
-		
+
 		/* run the methods */
 		$char = $this->session->userdata('characters');
 
@@ -415,6 +435,8 @@ class Write extends Write_base {
 
 			/* fill the content in */
 			$title = $row->log_title;
+			$sdate = $row->log_stardate;
+			$location = $row->log_location;
 			$content = $row->log_content;
 			$tags = $row->log_tags;
 
@@ -448,6 +470,14 @@ class Write extends Write_base {
 				'name' => 'tags',
 				'id' => 'tags',
 				'value' => $tags),
+			'stardate' => array(
+				'name' => 'sdate',
+				'id' => 'sdate',
+				'value' => $sdate),
+			'location' => array(
+				'name' => 'location',
+				'id' => 'location',
+				'value' => $location),
 			'post' => array(
 				'type' => 'submit',
 				'class' => 'button-main',
@@ -479,6 +509,8 @@ class Write extends Write_base {
 		$data['label'] = array(
 			'author' => ucwords(lang('labels_author')),
 			'content' => ucwords(lang('labels_content')),
+			'stardate' => ucwords(lang('labels_stardate')),
+			'location' => ucfirst(lang('labels_location')),
 			'tags' => ucwords(lang('labels_tags')),
 			'tags_sep' => lang('tags_separated'),
 			'title' => ucwords(lang('labels_title')),
