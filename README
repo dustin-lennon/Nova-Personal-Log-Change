@@ -60,5 +60,8 @@ as well.
 -------------------------------------
 Changelog - Dates are in Epoch time
 
+1270136498: Added application/language/english/app_lang.php to the repository. The perpose of this file is to
+			overwrite existing declared language keys.
+
 1270069498: Started work on coming up with an alternate layout for personal logs. Alternate layout includes fields
 			for location and stardate. Email template has been adjusted to show these as well.
