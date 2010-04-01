@@ -33,18 +33,22 @@ and before the Global items.
 	/* include Alternate Personal Log Language file */
 	include_once APPPATH .'language/'. $language . '/ucip_lang.php';
 
-6. Upload application/language/english/ucip_lang.php to your 
+6. Upload application/language/english/app_lang.php to your application/language/english folder of your Nova install 
+replacing the existing one if you haven't already modified this file. If you already have changes in this file, 
+it's best that you just take the contents of this file and add it into your existing app_lang.php file.
+
+7. Upload application/language/english/ucip_lang.php to your 
 application/views/language/english folder of your Nova install. Translate this page into other languages and upload
 them to the appropriate language directories. (If you would like your language included into a future release, 
 please contact me via email.)
 
-7. Upload application/views/_base_override/admin/pages/manage_logs_edit.php to your
+8. Upload application/views/_base_override/admin/pages/manage_logs_edit.php to your
 application/views/_base_override/admin/pages folder of your Nova install.
 
-8. Upload application/views/_base_override/admin/pages/write_personallog.php to your
+9. Upload application/views/_base_override/admin/pages/write_personallog.php to your
 application/views/_base_override/admin/pages folder of your Nova install.
 
-9. Upload application/views/_base_override/main/pages/sim_viewlog.php to your
+10. Upload application/views/_base_override/main/pages/sim_viewlog.php to your
 application/views/_base_override/main/pages folder of your Nova install.
 
 If you experience any issues please submit a bug report on
