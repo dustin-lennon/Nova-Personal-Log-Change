@@ -3,7 +3,7 @@
 |---------------------------------------------------------------
 | LANGUAGE FILE - ENGLISH
 |---------------------------------------------------------------
-| File: application/language/english/app_lang.php
+| File: application/language/english/ucip_lang.php
 | System Version: 1.0
 |
 | English language file for the system. Punctuation constants are
