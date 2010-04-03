@@ -674,6 +674,8 @@ class Write extends Write_base {
 				$from_name = $this->char->get_character_name($data['author'], TRUE, TRUE);
 				$from_email = $this->user->get_email_address('character', $data['author']);
 				$subject = $from_name ."'s ". lang('email_subject_personal_log') ." - ". $data['title'];
+				$location = lang('email_content_post_location') . $data['location'];
+				$stardate = lang('email_content_post_stardate') . $data['stardate'];
 
 				/* set the content */
 				$content = sprintf(
@@ -682,6 +684,8 @@ class Write extends Write_base {
 					$data['title'],
 					$from_name,
 					lang('global_personallog'),
+					$location,
+					$stardate,
 					$data['content'],
 					lang('global_personallog'),
 					site_url('login/index')

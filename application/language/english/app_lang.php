@@ -42,5 +42,16 @@ $lang['email_content_personal_log'] = "The following is a personal log from %s.
 
 %s";
 
+$lang['email_content_entry_pending'] = "The %s %s by %s has been held for moderation and must be approved before it can be emailed to the crew and appear on the site. For reference, the content of the pending %s is below.
+
+%s
+%s
+
+%s
+
+Please login using the link below to approve the %s.
+
+%s";
+
 /* End of file app_lang.php */
 /* Location: ./application/language/english/app_lang.php */

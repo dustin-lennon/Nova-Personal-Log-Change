@@ -43,5 +43,5 @@
 |---------------------------------------------------------------
 */
 
-$lang['labels_stardate'] = 'Stardate';
-$lang['email_content_post_stardate'] = 'Stardate';
+$lang['labels_stardate'] = "Stardate";
+$lang['email_content_post_stardate'] = "Stardate: ";

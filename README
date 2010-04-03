@@ -21,7 +21,7 @@ it's best that you just take the contents of this file and add it into your exis
 replacing the existing one if you haven't already modified this file. If you already have changes in this file, 
 it's best that you just take the contents of this file and add it into your existing sim.php file.
 
-4. Upload application/controllers/write.php to your application/controllers folder of your Nova install 
+4*. Upload application/controllers/write.php to your application/controllers folder of your Nova install 
 replacing the existing one if you haven't already modified this file. If you already have changes in this file, 
 it's best that you just take the contents of this file and add it into your existing write.php file.
 
