@@ -43,5 +43,18 @@
 |---------------------------------------------------------------
 */
 
-$lang['labels_stardate'] = "Stardate";
-$lang['email_content_post_stardate'] = "Stardate: ";
+$lang['labels_stardate'] = 'Stardate';
+$lang['email_content_post_stardate'] = 'Stardate';
+
+/*
+|---------------------------------------------------------------
+| UCIP PERSONAL LOG EMAIL FIELDS
+|---------------------------------------------------------------
+*/
+
+$lang['email_content_personal_log'] = "The following is a personal log from %s.
+
+%s
+%s
+
+%s";
