@@ -223,7 +223,7 @@ class Write extends Write_base {
 						}
 
 						break;
-						
+
 					case 'post':
 						/* check the moderation status */
 						$status = $this->user->checking_moderation('log', $this->session->userdata('userid'));
