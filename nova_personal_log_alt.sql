@@ -26,4 +26,4 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 ALTER TABLE `nova_personallogs` ADD `log_stardate` VARCHAR( 10 ) NULL AFTER `log_author_character`,
-ADD `log_location` VARCHAR( 255 ) NULL AFTER `log_stardate`
+ADD `log_location` VARCHAR( 255 ) NULL AFTER `log_stardate`;
