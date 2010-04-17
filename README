@@ -48,9 +48,9 @@ application/views/_base_override/admin/pages folder of your Nova install.
 application/views/_base_override/main/pages folder of your Nova install.
 
 If you experience any issues please submit a bug report on
-http://redmine.stelth2000inc.com/projects/nova-personal-log/issues.
+http://github.com/demonicpagan/Nova-Personal-Log-Change/issues.
 
-You can always get the latest SVN trunk from http://redmine.stelth2000inc.com/projects/show/nova-personal-log
+You can always get the latest SVN trunk from http://github.com/demonicpagan/Nova-Personal-Log-Change
 as well.
 
 -------------------------------------
