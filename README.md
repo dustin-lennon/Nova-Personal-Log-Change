@@ -55,14 +55,22 @@ as well.
 
 Changelog - Dates are in Epoch time
 -----------------------------------
-1272514259: Created a more readable README for GitHub.
+1272514259:
 
-1270559641: Nova 1.0 has added email_lang.php into the base_lang.php file for email language extensibility. Can
+*	Created a more readable README for GitHub.
+
+1270559641:
+
+*	Nova 1.0 has added email_lang.php into the base_lang.php file for email language extensibility. Can
 now place what was in app_lang.php into the ucip_lang.php file. Updated README. Removed app_lang.php
 file from repository.
 
-1270136498: Added application/language/english/app_lang.php to the repository. The perpose of this file is to
+1270136498:
+
+*	Added application/language/english/app_lang.php to the repository. The perpose of this file is to
 overwrite existing declared language keys.
 
-1270069498: Started work on coming up with an alternate layout for personal logs. Alternate layout includes fields
+1270069498:
+
+*	Started work on coming up with an alternate layout for personal logs. Alternate layout includes fields
 for location and stardate. Email template has been adjusted to show these as well.
