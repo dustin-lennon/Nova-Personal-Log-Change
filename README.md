@@ -29,6 +29,7 @@ it's best that you just take the contents of this file and add it into your exis
 
 5. Add the following line into your app_lang.php for your associated language(s) after the rest of the includes 
 and before the Global items.
+
 	`/* include Alternate Personal Log Language file */`<br />
 	`include_once APPPATH .'language/'. $language . '/ucip_lang.php';`
 
