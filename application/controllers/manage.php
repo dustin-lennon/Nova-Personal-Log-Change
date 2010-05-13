@@ -268,7 +268,7 @@ class Manage extends Manage_base {
 				'author' => ucwords(lang('labels_author'))
 			);
 
-			$js_data = FALSE;
+			$js_data['tab'] = 0;
 
 			/* figure out where the view should be coming from */
 			$view_loc = view_location('manage_logs_edit', $this->skin, 'admin');
