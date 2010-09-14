@@ -56,6 +56,8 @@ as well.
 -------------------------------------
 Changelog - Dates are in Epoch time
 
+1284468115: Updated controller files to work with Nova 1.1.
+
 1270559641: Nova 1.0 has added email_lang.php into the base_lang.php file for email language extensibility. Can
 			now place what was in app_lang.php into the ucip_lang.php file. Updated README. Removed app_lang.php
 			file from repository.

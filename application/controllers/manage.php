@@ -253,7 +253,7 @@ class Manage extends Manage_base {
 
 			$data['header'] = ucwords(lang('actions_edit') .' '. lang('global_personallogs'));
 			$data['id'] = $id;
-
+			
 			$data['label'] = array(
 				'back' => LARROW .' '. ucfirst(lang('actions_back')) .' '. lang('labels_to')
 					.' '. ucwords(lang('global_personallogs')),
@@ -302,7 +302,7 @@ class Manage extends Manage_base {
 			$data['saved'] = $this->_entries_ajax($offset_saved, 'saved', 'logs');
 			$data['pending'] = $this->_entries_ajax($offset_pending, 'pending', 'logs');
 
-		    $data['label'] = array(
+			$data['label'] = array(
 				'activated' => ucfirst(lang('status_activated')),
 				'pending' => ucfirst(lang('status_pending')),
 				'saved' => ucfirst(lang('status_saved')),

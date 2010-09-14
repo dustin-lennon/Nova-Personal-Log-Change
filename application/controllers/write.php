@@ -32,7 +32,7 @@ class Write extends Write_base {
 		{
 			$flash['status'] = 'info';
 			$flash['message'] = lang_output('flash_system_email_off');
-			
+
 			/* write everything to the template */
 			$this->template->write_view('flash_message', '_base/admin/pages/flash', $flash);
 		}
@@ -681,10 +681,10 @@ class Write extends Write_base {
 					$data['title'],
 					$from_name,
 					lang('global_personallog'),
-					$location,
-					$stardate,
 					$data['content'],
 					lang('global_personallog'),
+					$location,
+					$stardate,
 					site_url('login/index')
 				);
 

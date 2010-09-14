@@ -55,6 +55,10 @@ as well.
 
 Changelog - Dates are in Epoch time
 -----------------------------------
+1284468115
+
+*	Updated controller files to work with Nova 1.1.
+
 1272514259:
 
 *	Created a more readable README for GitHub.

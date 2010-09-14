@@ -31,11 +31,11 @@ class Sim extends Sim_base {
 		if ($this->session->userdata('userid') !== FALSE && isset($_POST['submit']))
 		{
 			$comment_text = $this->input->post('comment_text');
-			
+
 			if (!empty($comment_text))
 			{
 				$status = $this->user->checking_moderation('log_comment', $this->session->userdata('userid'));
-				
+
 				/* build the insert array */
 				$insert = array(
 					'lcomment_content' => $comment_text,
@@ -57,7 +57,7 @@ class Sim extends Sim_base {
 						lang('actions_added'),
 						''
 					);
-					
+
 					$flash['status'] = 'success';
 					$flash['message'] = text_output($message);
 
