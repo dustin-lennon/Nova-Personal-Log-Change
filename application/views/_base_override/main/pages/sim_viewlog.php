@@ -1,3 +1,5 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
+
 <?php if (isset($next) || isset($prev)): ?>
 	<div class="float_right">
 		<?php if (isset($prev)): ?>
@@ -58,7 +60,7 @@
 
 <p><?php echo anchor('feed/logs', img($images['feed']), array('class' => 'image'));?></p>
 
-<?php if ($this->auth->is_logged_in() === TRUE): ?>
+<?php if (Auth::is_logged_in()): ?>
 	<p class="bold">
 		<a href="#" id="add_comment" rel="facebox" myID="<?php echo $id;?>" class="image">
 			<?php echo img($images['comment']) .' '. $label['addcomment'];?>
@@ -66,8 +68,8 @@
 	</p>
 <?php endif; ?>
 
-<?php if (isset($comments) && is_array($comments)): ?>
-	<h2 class="gray"><?php echo $label['comments'] . ' (' . $comment_count . ')';?></h2>
+<?php if (isset($comments) and is_array($comments)): ?>
+	<a name="comments"></a><h2 class="gray"><?php echo $label['comments'] . ' (' . $comment_count . ')';?></h2>
 
 	<div id="comments">
 	<?php foreach ($comments as $value): ?>

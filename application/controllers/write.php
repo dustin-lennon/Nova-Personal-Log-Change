@@ -477,6 +477,16 @@ class Write extends Nova_write {
 
 		$data['form_action'] = ($id !== false) ? 'write/personallog/'. $id : 'write/personallog';
 
+		$data['images'] = array(
+			'help' => array(
+				'src' => Location::img('help.png', $this->skin, 'admin'),
+				'alt' => '',
+				'class' => 'image',
+				'rel' => 'tooltip',
+				'title' => lang('tags_explain'),
+			),
+		);
+
 		$data['label'] = array(
 			'author' => ucwords(lang('labels_author')),
 			'content' => ucwords(lang('labels_content')),

@@ -50,11 +50,18 @@ application/views/_base_override/main/pages folder of your Nova install.
 If you experience any issues please submit a bug report on
 <http://github.com/demonicpagan/Nova-Personal-Log-Change/issues>.
 
-You can always get the latest SVN trunk from <http://github.com/demonicpagan/Nova-Personal-Log-Change>
+You can always get the latest trunk from <http://github.com/demonicpagan/Nova-Personal-Log-Change>
 as well.
 
 Changelog - Dates are in Epoch time
 -----------------------------------
+1347264535:
+
+*	Updated write.php to be compatible with Nova 2.1.0
+*	Updated manage_logs_edit.php to use code under Nova 2.1.0
+*	Updated write_peronallog.php to be uniform with Nova 2.1.0
+*	Updated sim_viewlog.php to be uniform with Nova 2.1.0
+
 1328666468:
 
 *	Updating files to be compatible with Nova 2.0.1
