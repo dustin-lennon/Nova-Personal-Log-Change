@@ -55,6 +55,10 @@ as well.
 
 Changelog - Dates are in Epoch time
 -----------------------------------
+1410004755:
+
+*	Updated files to compatible with Nova 2.3.2
+
 1347264535:
 
 *	Updated write.php to be compatible with Nova 2.1.0

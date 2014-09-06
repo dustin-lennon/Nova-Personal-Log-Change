@@ -130,7 +130,7 @@ class Sim extends Nova_sim {
 			$data['title'] = $logs->log_title;
 			$data['content'] = $logs->log_content;
 			$data['date'] = mdate($datestring, $date);
-			$data['author'] = $this->char->get_character_name($logs->log_author_character, true);
+			$data['author'] = $this->char->get_character_name($logs->log_author_character, true, false, true);
 			$data['tags'] = ( ! empty($logs->log_tags)) ? $logs->log_tags : NULL;
 			$data['location'] = $logs->log_location;
 			$data['stardate'] = $logs->log_stardate;
@@ -186,7 +186,7 @@ class Sim extends Nova_sim {
 			{
 				$date = gmt_to_local($c->lcomment_date, $this->timezone, $this->dst);
 
-				$data['comments'][$i]['author'] = $this->char->get_character_name($c->lcomment_author_character, true);
+				$data['comments'][$i]['author'] = $this->char->get_character_name($c->lcomment_author_character, true, false, true);
 				$data['comments'][$i]['content'] = $c->lcomment_content;
 				$data['comments'][$i]['date'] = mdate($datestring, $date);
 
