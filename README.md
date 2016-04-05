@@ -55,6 +55,10 @@ as well.
 
 Changelog - Dates are in Epoch time
 -----------------------------------
+1459829902:
+
+*	Updated files to work with Nova 2.4.5
+
 1410004755:
 
 *	Updated files to compatible with Nova 2.3.2
