@@ -110,111 +110,156 @@ class Sim extends Nova_sim {
 
 		if ($logs !== false)
 		{
-			// grab the next and previous IDs
-			$next = $this->logs->get_link_id($id);
-			$prev = $this->logs->get_link_id($id, 'prev');
+			$canView = false;
 
-			// set the date format
-			$datestring = $this->options['date_format'];
-
-			// set the date
-			$date = gmt_to_local($logs->log_date, $this->timezone, $this->dst);
-
-			if ($logs->log_date < $logs->log_last_update)
+			if (! Auth::is_logged_in())
 			{
-				$edited = gmt_to_local($logs->log_last_update, $this->timezone, $this->dst);
-				$data['update'] = mdate($datestring, $edited);
-			}
-
-			$data['id'] = $logs->log_id;
-			$data['title'] = $logs->log_title;
-			$data['content'] = $logs->log_content;
-			$data['date'] = mdate($datestring, $date);
-			$data['author'] = $this->char->get_character_name($logs->log_author_character, true, false, true);
-			$data['tags'] = ( ! empty($logs->log_tags)) ? $logs->log_tags : NULL;
-			$data['location'] = $logs->log_location;
-			$data['stardate'] = $logs->log_stardate;
-
-			// determine if they can edit the log
-			if (Auth::is_logged_in() === true and ( (Auth::get_access_level('manage/logs') == 2) or
-				(Auth::get_access_level('manage/logs') == 1 and $this->session->userdata('userid') == $logs->log_author_user)))
-			{
-				$data['edit_valid'] = true;
+				if ($logs->log_status == 'activated')
+				{
+					$canView = true;
+				}
 			}
 			else
 			{
-				$data['edit_valid'] = false;
+				if ($logs->log_status == 'activated')
+				{
+					$canView = true;
+				}
+				else
+				{
+					if (Auth::get_access_level('manage/logs') == 1 and (int) $this->session('userid') == $logs->log_author_user)
+					{
+						$canView = true;
+					}
+
+					if (Auth::get_access_level('manage/logs') == 2)
+					{
+						$canView = true;
+					}
+				}
 			}
 
-			if ($next !== false)
+			if (! $canView)
 			{
-				$data['next'] = $next;
-			}
+				$data['header'] = sprintf(lang('error_title_invalid_char'), ucwords(lang('global_personallog')));
 
-			if ($prev !== false)
+				// figure out where the view should be coming from
+				$view_loc = 'error';
+				$js_loc = false;
+
+				// write the title
+				$this->_regions['title'] .= lang('error_pagetitle');
+			}
+			else
 			{
-				$data['prev'] = $prev;
+				$view_loc = 'sim_viewlog';
+
+				// grab the next and previous IDs
+				$next = $this->logs->get_link_id($id);
+				$prev = $this->logs->get_link_id($id, 'prev');
+
+				// set the date format
+				$datestring = $this->options['date_format'];
+
+				// set the date
+				$date = gmt_to_local($logs->log_date, $this->timezone, $this->dst);
+
+				if ($logs->log_date < $logs->log_last_update)
+				{
+					$edited = gmt_to_local($logs->log_last_update, $this->timezone, $this->dst);
+					$data['update'] = mdate($datestring, $edited);
+				}
+
+				$data['id'] = $logs->log_id;
+				$data['title'] = $logs->log_title;
+				$data['content'] = $logs->log_content;
+				$data['date'] = mdate($datestring, $date);
+				$data['author'] = $this->char->get_character_name($logs->log_author_character, true, false, true);
+				$data['tags'] = ( ! empty($logs->log_tags)) ? $logs->log_tags : NULL;
+				$data['location'] = $logs->log_location;
+				$data['stardate'] = $logs->log_stardate;
+
+				// determine if they can edit the log
+				if (Auth::is_logged_in() === true and ( (Auth::get_access_level('manage/logs') == 2) or
+					(Auth::get_access_level('manage/logs') == 1 and $this->session->userdata('userid') == $logs->log_author_user)))
+				{
+					$data['edit_valid'] = true;
+				}
+				else
+				{
+					$data['edit_valid'] = false;
+				}
+
+				if ($next !== false)
+				{
+					$data['next'] = $next;
+				}
+
+				if ($prev !== false)
+				{
+					$data['prev'] = $prev;
+				}
+
+				// image parameters
+				$data['images'] = array(
+					'next' => array(
+						'src' => Location::img('next.png', $this->skin, 'main'),
+						'alt' => ucfirst(lang('actions_next')),
+						'class' => 'image'),
+					'prev' => array(
+						'src' => Location::img('previous.png', $this->skin, 'main'),
+						'alt' => ucfirst(lang('status_previous')),
+						'class' => 'image'),
+					'feed' => array(
+						'src' => Location::img('feed.png', $this->skin, 'main'),
+						'alt' => lang('labels_subscribe'),
+						'class' => 'image'),
+					'comment' => array(
+						'src' => Location::img('comment-add.png', $this->skin, 'main'),
+						'alt=' => '',
+						'class' => 'inline_img_left image'),
+				);
+
+				$data['comment_count'] = $comments->num_rows();
+
+				if ($comments->num_rows() > 0)
+				{
+					$i = 1;
+					foreach ($comments->result() as $c)
+					{
+						$date = gmt_to_local($c->lcomment_date, $this->timezone, $this->dst);
+
+						$data['comments'][$i]['author'] = $this->char->get_character_name($c->lcomment_author_character, true, false, true);
+						$data['comments'][$i]['content'] = $c->lcomment_content;
+						$data['comments'][$i]['date'] = mdate($datestring, $date);
+
+						++$i;
+					}
+				}
+
+				$data['label'] = array(
+					'addcomment' => ucfirst(lang('actions_add')).' '.lang('labels_a').' '.ucfirst(lang('labels_comment')),
+					'by' => lang('labels_by'),
+					'comments' => ucfirst(lang('labels_comments')),
+					'edit' => '[ '. ucfirst(lang('actions_edit')) .' ]',
+					'edited' => ucfirst(lang('actions_edited') .' '. lang('labels_on')),
+					'on' => lang('labels_on'),
+					'posted' => ucfirst(lang('actions_posted') .' '. lang('labels_on')),
+					'tags' => ucfirst(lang('labels_tags')) .':',
+					'title' => ucfirst(lang('labels_title')),
+					'view_log' => ucwords(lang('actions_view') .' '. lang('global_log')),
+					'location' => ucfirst(lang('labels_location')),
+					'stardate' => ucfirst(lang('labels_stardate')),
+				);
+
+				$this->_regions['title'].= $data['title'];
 			}
 		}
-
-		// image parameters
-		$data['images'] = array(
-			'next' => array(
-				'src' => Location::img('next.png', $this->skin, 'main'),
-				'alt' => ucfirst(lang('actions_next')),
-				'class' => 'image'),
-			'prev' => array(
-				'src' => Location::img('previous.png', $this->skin, 'main'),
-				'alt' => ucfirst(lang('status_previous')),
-				'class' => 'image'),
-			'feed' => array(
-				'src' => Location::img('feed.png', $this->skin, 'main'),
-				'alt' => lang('labels_subscribe'),
-				'class' => 'image'),
-			'comment' => array(
-				'src' => Location::img('comment-add.png', $this->skin, 'main'),
-				'alt=' => '',
-				'class' => 'inline_img_left image'),
-		);
-
-		$data['comment_count'] = $comments->num_rows();
-
-		if ($comments->num_rows() > 0)
-		{
-			$i = 1;
-			foreach ($comments->result() as $c)
-			{
-				$date = gmt_to_local($c->lcomment_date, $this->timezone, $this->dst);
-
-				$data['comments'][$i]['author'] = $this->char->get_character_name($c->lcomment_author_character, true, false, true);
-				$data['comments'][$i]['content'] = $c->lcomment_content;
-				$data['comments'][$i]['date'] = mdate($datestring, $date);
-
-				++$i;
-			}
-		}
-
-		$data['label'] = array(
-			'addcomment' => ucfirst(lang('actions_add')).' '.lang('labels_a').' '.ucfirst(lang('labels_comment')),
-			'by' => lang('labels_by'),
-			'comments' => ucfirst(lang('labels_comments')),
-			'edit' => '[ '. ucfirst(lang('actions_edit')) .' ]',
-			'edited' => ucfirst(lang('actions_edited') .' '. lang('labels_on')),
-			'on' => lang('labels_on'),
-			'posted' => ucfirst(lang('actions_posted') .' '. lang('labels_on')),
-			'tags' => ucfirst(lang('labels_tags')) .':',
-			'title' => ucfirst(lang('labels_title')),
-			'view_log' => ucwords(lang('actions_view') .' '. lang('global_log')),
-			'location' => ucfirst(lang('labels_location')),
-			'stardate' => ucfirst(lang('labels_stardate')),
-		);
 
 		$this->_regions['content'] = Location::view('sim_viewlog', $this->skin, 'main', $data);
 		$this->_regions['javascript'] = Location::js('sim_viewlog_js', $this->skin, 'main');
-		$this->_regions['title'].= $data['title'];
 
 		Template::assign($this->_regions);
-
 		Template::render();
 	}
 }
